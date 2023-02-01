@@ -79,28 +79,7 @@ mapServer <- function(id) {
 
       if (nrow(df) == 0) return()
 
-      mapData <- df |>
-        # dplyr::rowwise() |>
-        dplyr::mutate(
-          locality = stringr::str_replace_all(locality, "Poland - ", ""),
-          mediaAccessURI = ifelse(is.na(mediaAccessURI), "www/noimg.png", mediaAccessURI),
-          lifeStage = stringr::str_to_title(lifeStage),
-          sex = stringr::str_to_title(sex)
-        ) |>
-        dplyr::mutate(
-          label = paste0(
-            # collapse = "<br/>",
-            "<p><b>", catalogNumber, "</b></p>",
-            "<img class=\"popup_img\" src=\"", mediaAccessURI, "\" alt=\"", mediaRightsHolder, "\">",
-            "<p></p>",
-            "<p><b>Location: </b>", locality, "</p>",
-            "<p><b>Date: </b>", eventDate, "</p>",
-            "<p><b>Observations: </b>", individualCount, "</p>",
-            "<p><b>Life Stage: </b>", lifeStage, "</p>",
-            "<p><b>Sex: </b>", sex, "</p>",
-            "<a href=\"", references, "\" target=\"_blank\">More information</a>"
-          )
-        )
+      mapData <- createPopupData(df)
 
       leaflet::leafletProxy("leafMap", data = mapData) |>
         leaflet::clearPopups() |>
@@ -119,29 +98,11 @@ mapServer <- function(id) {
     # Table with details of the species selected
     output$selectedData <- renderTable(colnames = FALSE, width = "100%",
                                        striped = TRUE, spacing = "xs", bordered = TRUE, {
+
       req(data)
-      dataSpecies <- data() |>
-        dplyr::select(scientificName, vernacularName, family, kingdom, individualCount) |>
-        dplyr::mutate(family = stringr::str_to_title(stringr::str_replace_all(family, "_", " ")))
-      table <- data.frame(
-        Name = c(
-          "Scientific Name",
-          "Vernacular Name",
-          "Family",
-          "Kingdom",
-          "Registers",
-          "Observations"
-        ),
-        Info = c(
-          paste0(unique(dataSpecies$scientificName), collapse = ", "),
-          paste0(unique(dataSpecies$vernacularName), collapse = ", "),
-          paste0(unique(dataSpecies$family), collapse = ", "),
-          paste0(unique(dataSpecies$kingdom), collapse = ", "),
-          nrow(dataSpecies),
-          sum(dataSpecies$individualCount, na.rm = TRUE)
-        )
-      )
-      table
+
+      createInfoTable(data())
+
     })
 
     return(data)
@@ -158,4 +119,54 @@ addMultipleProviderTiles <- function(map, provider, group = names(provider)) {
   return(map)
 }
 
+# Create table to show species details
+createInfoTable <- function(speciesData) {
+  dataSpecies <- speciesData |>
+    dplyr::select(scientificName, vernacularName, family, kingdom, individualCount) |>
+    dplyr::mutate(family = stringr::str_to_title(stringr::str_replace_all(family, "_", " ")))
+  data.frame(
+    Name = c(
+      "Scientific Name",
+      "Vernacular Name",
+      "Family",
+      "Kingdom",
+      "Registers",
+      "Observations"
+    ),
+    Info = c(
+      paste0(unique(dataSpecies$scientificName), collapse = ", "),
+      paste0(unique(dataSpecies$vernacularName), collapse = ", "),
+      paste0(unique(dataSpecies$family), collapse = ", "),
+      paste0(unique(dataSpecies$kingdom), collapse = ", "),
+      nrow(dataSpecies),
+      sum(dataSpecies$individualCount, na.rm = TRUE)
+    )
+  )
+}
+
+# Create data.frame to be used in popups
+createPopupData <- function(speciesData) {
+  speciesData |>
+    # dplyr::rowwise() |>
+    dplyr::mutate(
+      locality = stringr::str_replace_all(locality, "Poland - ", ""),
+      mediaAccessURI = ifelse(is.na(mediaAccessURI), "www/noimg.png", mediaAccessURI),
+      lifeStage = stringr::str_to_title(lifeStage),
+      sex = stringr::str_to_title(sex)
+    ) |>
+    dplyr::mutate(
+      label = paste0(
+        # collapse = "<br/>",
+        "<p><b>", catalogNumber, "</b></p>",
+        "<img class=\"popup_img\" src=\"", mediaAccessURI, "\" alt=\"", mediaRightsHolder, "\">",
+        "<p></p>",
+        "<p><b>Location: </b>", locality, "</p>",
+        "<p><b>Date: </b>", eventDate, "</p>",
+        "<p><b>Observations: </b>", individualCount, "</p>",
+        "<p><b>Life Stage: </b>", lifeStage, "</p>",
+        "<p><b>Sex: </b>", sex, "</p>",
+        "<a href=\"", references, "\" target=\"_blank\">More information</a>"
+      )
+    )
+}
 
