@@ -1,0 +1,22 @@
+Package: biodiversityApp
+Title: Polish Biodiversity Explorer Shiny App
+Version: 1.0
+Authors@R: 
+    person("Vinícius", "Zendron", , "viniciuszendron50@outlook.com", role = c("aut", "cre"))
+Description: Sample application to explore biodiversity data in Poland.
+License: Proprietary
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 4.1),
+    shiny
+LazyData: true
+Imports: 
+    dplyr,
+    leaflet,
+    leaflet.extras,
+    pkgload,
+    shinyWidgets,
+    stringr,
+    timevis

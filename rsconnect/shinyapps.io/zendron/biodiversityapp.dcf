@@ -1,0 +1,11 @@
+name: biodiversityapp
+title:
+username:
+account: zendron
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8186904
+bundleId: 6795902
+url: https://zendron.shinyapps.io/biodiversityapp/
+when: 1675216125.01301
+lastSyncTime: 1675216125.01303

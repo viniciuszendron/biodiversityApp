@@ -1,0 +1,63 @@
+
+.leaflet-control-attribution {
+  z-index: -999;
+}
+
+div.table_details {
+  overflow: auto;
+  max-height: 280px;
+}
+
+div.outer {
+  position: fixed;
+  top: 55px;
+  left: 0;
+  right: 0;
+  bottom: 118px;
+  overflow: hidden;
+  padding: 0;
+}
+
+div.timeline_bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -25px;
+  overflow: hidden;
+  padding: 0;
+  z-index: -1000;
+}
+
+.floatbar {
+  background-color: color(srgb 0.9716 0.9766 0.981);
+  padding: 0 20px 20px 20px;
+  cursor: move;
+  opacity: 0.8;
+  zoom: 0.9;
+  transition: opacity 200ms 400ms;
+  border-radius: 8px;
+  max-height: 500px;
+  overflow: auto;
+  z-index: 99999;
+}
+.floatbar:hover {
+  opacity: 0.97;
+  transition-delay: 0;
+}
+
+.popup_img {
+  max-height: 140px;
+}
+
+.leaflet-popup-content {
+  line-height: 0;
+  margin: 0px 8px;
+  overflow: auto;
+  max-height: 500px;
+}
+
+.leaflet_hover_pop {
+  line-height: 0;
+  margin: 12px 12px;
+}
+
