@@ -1,4 +1,6 @@
 # usethis::use_build_ignore("deploy")
+if (!requireNamespace("rsconnect"))
+  install.packages("rsconnect")
 rsconnect::setAccountInfo(
   Sys.getenv("SHINYAPPS_ACCOUNT"),
   Sys.getenv("SHINYAPPS_TOKEN"),
