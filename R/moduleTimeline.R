@@ -18,7 +18,6 @@ timelineServer <- function(id, data) {
   moduleServer(id, function(input, output, session) {
     output$timeline <- timevis::renderTimevis({
       timeline_data <- data() |>
-        # content = stringr::str_remove(locality, "Poland - ")
         dplyr::mutate(start = eventDate, content = catalogNumber, id = id) |>
         dplyr::select(start, content, id)
 
@@ -26,7 +25,7 @@ timelineServer <- function(id, data) {
                        options = list(editable = FALSE,
                                       height = "123px",
                                       locale = "en")
-                       ) #|> timevis::fitWindow()
+                       )
     })
   })
 

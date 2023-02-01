@@ -147,7 +147,6 @@ createInfoTable <- function(speciesData) {
 # Create data.frame to be used in popups
 createPopupData <- function(speciesData) {
   speciesData |>
-    # dplyr::rowwise() |>
     dplyr::mutate(
       locality = stringr::str_replace_all(locality, "Poland - ", ""),
       mediaAccessURI = ifelse(is.na(mediaAccessURI), "www/noimg.png", mediaAccessURI),
@@ -156,7 +155,6 @@ createPopupData <- function(speciesData) {
     ) |>
     dplyr::mutate(
       label = paste0(
-        # collapse = "<br/>",
         "<p><b>", catalogNumber, "</b></p>",
         "<img class=\"popup_img\" src=\"", mediaAccessURI, "\" alt=\"", mediaRightsHolder, "\">",
         "<p></p>",
