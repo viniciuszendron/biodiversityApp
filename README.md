@@ -23,7 +23,7 @@ remotes::install_local(path = ".",
                        INSTALL_opts = c("--no-multiarch"))
 ```
 
-## Running Application
+## Starting the Application
 
 To start the application, run the following command:
 
