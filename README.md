@@ -48,7 +48,7 @@ The repository is hosted at GitHub and a CI/CD workflow is active, performing th
 ## Next steps
 
 - Improve modularization;
-- Include Unit Tests and an End to End Test;
+- Include more Unit Tests and an End to End Test;
 - UI/UX improvements (popups, timeline, map-timeline communication, Data Explorer Tab, ...);
 - Implement support to global data (using `arrow`?).
 
