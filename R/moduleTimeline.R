@@ -1,3 +1,5 @@
+
+#' @import shiny
 timelineUI <- function(id) {
   ns <- NS(id)
   tagList(
@@ -8,6 +10,7 @@ timelineUI <- function(id) {
   )
 }
 
+#' @import shiny
 timelineServer <- function(id, data) {
 
   stopifnot(is.reactive(data))
@@ -19,8 +22,10 @@ timelineServer <- function(id, data) {
         dplyr::mutate(start = eventDate, content = catalogNumber, id = id) |>
         dplyr::select(start, content, id)
 
-      timevis::timevis(timeline_data, fit = TRUE, #height = "123px",
-                       options = list(editable = FALSE, height = "123px", locale = "en")
+      timevis::timevis(timeline_data, fit = TRUE,
+                       options = list(editable = FALSE,
+                                      height = "123px",
+                                      locale = "en")
                        ) #|> timevis::fitWindow()
     })
   })

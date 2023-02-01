@@ -31,8 +31,6 @@ mapServer <- function(id) {
 
   moduleServer(id, function(input, output, session) {
 
-    #data("biodiversityPL", package = "biodiversityApp")
-
     # Get data for the selected species
     data <- reactive({
       biodiversityPL |>
@@ -104,7 +102,6 @@ mapServer <- function(id) {
           )
         )
 
-      # browser()
       leaflet::leafletProxy("leafMap", data = mapData) |>
         leaflet::clearPopups() |>
         leaflet::clearMarkerClusters() |>
@@ -119,20 +116,7 @@ mapServer <- function(id) {
 
     })
 
-    # Watch any Input Changes and assign to a reactive value (DEBUG)
-    # inputChanges <- reactiveValues(lastUpdated = NULL)
-    # observe({
-    #   lapply(names(input), function(x) {
-    #     observe({
-    #       input[[x]]
-    #       inputChanges$lastUpdated <- x
-    #     })
-    #   })
-    # })
-    # observe({
-    #   print(inputChanges$lastUpdated)
-    # })
-
+    # Table with details of the species selected
     output$selectedData <- renderTable(colnames = FALSE, width = "100%",
                                        striped = TRUE, spacing = "xs", bordered = TRUE, {
       req(data)
@@ -166,6 +150,7 @@ mapServer <- function(id) {
 
 }
 
+# Iterate addProviderTiles function
 addMultipleProviderTiles <- function(map, provider, group = names(provider)) {
   for (i in seq_along(provider)) {
     map <- leaflet::addProviderTiles(map, provider[[i]], group = group[[i]])

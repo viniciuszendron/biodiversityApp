@@ -12,14 +12,7 @@ biodiversityApp <- function(...) {
     navbarPage(
       "Polish Biodiversity", id = "main",
       collapsible = TRUE,
-      theme = bslib::bs_theme(
-        version = "5",
-        # bg = "#FFFFFF",
-        # fg = "#000000",
-        # primary = "#0199F8",
-        # secondary = "#FF374B",
-        # base_font = "Maven Pro"
-      ),
+      theme = bslib::bs_theme(version = "5"),
       tabPanel(
         "Map Explorer",
         value = "mapPage",
@@ -48,7 +41,6 @@ addExternalResources <- function(){
   )
 
   tags$head(
-    #shinyjs::useShinyjs(),
     tags$link(rel = "stylesheet", type="text/css", href="www/style.css")
   )
 
