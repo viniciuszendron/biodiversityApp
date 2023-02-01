@@ -29,7 +29,7 @@ div.timeline_bottom {
 }
 
 .floatbar {
-  background-color: color(srgb 0.9716 0.9766 0.981);
+  background-color: #f8f9fa !important;
   padding: 0 20px 20px 20px;
   cursor: move;
   opacity: 0.8;
