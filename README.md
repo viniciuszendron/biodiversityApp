@@ -3,6 +3,7 @@
 
 <!-- badges: start -->
 [![version](https://img.shields.io/badge/version-1.0-green.svg)](https://semver.org)
+[![CI-CD](https://github.com/viniciuszendron/biodiversityApp/actions/workflows/CI-CD.yaml/badge.svg)](https://github.com/viniciuszendron/biodiversityApp/actions/workflows/CI-CD.yaml)
 <!-- badges: end -->
 
 ## Overview 
