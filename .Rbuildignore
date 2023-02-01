@@ -6,3 +6,4 @@
 ^\.github$
 ^deploy$
 ^dev$
+^LICENSE\.md$
