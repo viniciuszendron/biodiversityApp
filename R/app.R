@@ -1,4 +1,8 @@
 
+#' Main Shiny App Function
+#'
+#' @param ... Additional parameters.
+#'
 #' @import shiny
 #' @export
 biodiversityApp <- function(...) {
